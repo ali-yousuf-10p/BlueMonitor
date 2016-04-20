@@ -62,10 +62,15 @@ void loop() {
   while(Serial.available()) {
     
     String str = Serial.readStringUntil('\n');
-    bool isValid = setStatus(str);
+    if (str.equals("status")) {
+      Serial.println(nStatus === HIGH ? "off" : "on");
+    }
+    else {
+      bool isValid = setStatus(str);
 
-    if (isValid) {
-      Serial.println("ok");
+      if (isValid) {
+        Serial.println("ok");
+      }
     }
   }
 }
